@@ -43,13 +43,13 @@ const Profile: React.FC = () => {
           old_password: Yup.string(),
           password: Yup.string().when('old_password', {
             is: val => !!val.length,
-            then: Yup.string().required('Campo obrigatório'),
+            then: Yup.string().min(6, 'No mínimo 6 dígitos'),
             otherwise: Yup.string(),
           }),
           password_confirmation: Yup.string()
             .when('old_password', {
               is: val => !!val.length,
-              then: Yup.string().required('Campo obrigatório'),
+              then: Yup.string().min(6, 'No mínimo 6 dígitos'),
               otherwise: Yup.string(),
             })
             .oneOf([Yup.ref('password'), null], 'Confirmação incorreta'),
@@ -105,7 +105,7 @@ const Profile: React.FC = () => {
         });
       }
     },
-    [addToast, history],
+    [addToast, updateUser, history],
   );
 
   const handleAvatarChange = useCallback(

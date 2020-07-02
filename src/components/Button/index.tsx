@@ -1,5 +1,4 @@
 import React, { ButtonHTMLAttributes } from 'react';
-import loadingImg from '../../assets/loading.gif';
 import { Container } from './styles';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
