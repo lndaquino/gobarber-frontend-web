@@ -1,6 +1,8 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
+import defaultAvatar from '../assets/default-avatar.jpg';
+
 interface User {
   id: string;
   name: string;
@@ -44,6 +46,7 @@ const AuthProvider: React.FC = ({ children }) => {
     const response = await api.post('sessions', { email, password });
 
     const { token, user } = response.data;
+    if (!user.avatar_url) user.avatar_url = defaultAvatar;
 
     localStorage.setItem('@GoBarber:token', token);
     localStorage.setItem('@GoBarber:user', JSON.stringify(user));
